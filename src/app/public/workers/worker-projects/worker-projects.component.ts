@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-worker-projects',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./worker-projects.component.css']
 })
 export class WorkerProjectsComponent implements OnInit {
+  workerId: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.workerId = this.route.snapshot.paramMap.get('workerId');
   }
 
 }
