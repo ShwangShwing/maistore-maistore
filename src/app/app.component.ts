@@ -10,11 +10,13 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title: string;
   user: Observable<firebase.User>;
   items: FirebaseListObservable<any[]>;
-  msgVal: string = '';
+  msgVal = '';
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
+    this.title = 'maistore-app';
     this.items = af.list('/messages', {
       query: {
         limitToLast: 50
