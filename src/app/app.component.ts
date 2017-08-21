@@ -26,8 +26,23 @@ export class AppComponent {
     this.user = this.afAuth.authState;
 
   }
-  login() {
-    this.afAuth.auth.signInAnonymously();
+
+  createUser(email: string, password: string) {
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  login(email: string, password: string) {
+    this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  checkIfLogged() {
+    this.afAuth.auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log('logged');
+      } else {
+        console.log('not logged');
+      }
+    });
   }
 
   logout() {
