@@ -13,22 +13,21 @@ export class AppComponent {
   title: string;
   user: Observable<firebase.User>;
   items: FirebaseListObservable<any[]>;
-  msgVal = '';
+  msgVal: string;
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.title = 'maistore-app';
-    this.items = af.list('/messages', {
-      query: {
-        limitToLast: 50
-      }
-    });
+    // this.items = af.list('/messages', {
+    //   query: {
+    //     limitToLast: 50
+    //   }
+    // });
 
     this.user = this.afAuth.authState;
 
   }
-
   createUser(email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   login(email: string, password: string) {
@@ -47,6 +46,29 @@ export class AppComponent {
 
   logout() {
     this.afAuth.auth.signOut();
+  }
+
+  writeUserData(data: string) {  // data is a object {---}
+    const user = this.afAuth.auth.currentUser,
+      userID = user.uid;
+    return this.af.database.ref('users/' + userID).set(data); // users/+ uid ---> path to the individual user data
+  }
+
+  updateUserData(data: string) {
+    const user = this.afAuth.auth.currentUser,
+      userID = user.uid;
+    return this.af.database.ref('users/' + userID).push(data);
+  }
+
+  removeUserData() {
+    const user = this.afAuth.auth.currentUser,
+      userID = user.uid;
+    return this.af.database.ref('users/' + userID).remove();
+  }
+
+  readUserDataOnce() {
+    const userID = this.afAuth.auth.currentUser.uid;
+    return this.af.database.ref('users/' + userID).once('value');
   }
 
   Send(desc: string) {

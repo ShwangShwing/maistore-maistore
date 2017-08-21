@@ -18,10 +18,20 @@
   </li>
 </ul>
 <div class="row columns">
-  <button (click)="login()" *ngIf="!(user | async)?.uid">Anonymous Login</button>
+
+    <div class="sign-form">
+        <h3 class="form-register form-header">Sign Up Form</h3>
+        <form id="sign-up">
+            <input placeholder="Email" type="email" class="form-register form-control" id="tb-newEmail" #email/>
+            <input placeholder="Password" type="password" class="form-register form-control" id="tb-newPassword" #pass/>
+            
+            <button (click)="createUser(email.value, pass.value)" *ngIf="!(user | async)?.uid">Register</button>
+        </form>
+    </div>
+  
   <button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
 
-  <input type="text" id="message" *ngIf="(user | async)?.uid" placeholder="What is it that you do?" (keyup.enter)="Send($event.target.value)" [(ngModel)]="msgVal" />
+  <input type="text" id="message" *ngIf="(user | async)?.uid" placeholder="What is it that you do?" (keyup.enter)="updateUserData($event.target.value)" [(ngModel)]="msgVal" />
   <div id="details-container">
       <p *ngFor="let item of items | async"><img src="../assets/images/pin.svg">{{item.message}}</p>
   </div>
