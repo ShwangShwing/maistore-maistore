@@ -71,6 +71,10 @@ export class AppComponent {
     return this.af.database.ref('users/' + userID).once('value');
   }
 
+  updateData(data: string) {
+    return this.af.database.ref('products/').update(data);
+  }
+
   Send(desc: string) {
     this.items.push({ message: desc });
     this.msgVal = '';
