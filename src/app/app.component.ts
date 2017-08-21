@@ -23,7 +23,8 @@ export class AppComponent {
     //   }
     // });
 
-    this.user = this.afAuth.authState;
+    this.user = this.afAuth.authState; // check in real time weather user is logged or not
+    console.log(this.user);
 
   }
   createUser(email: string, password: string) {
@@ -48,13 +49,13 @@ export class AppComponent {
     this.afAuth.auth.signOut();
   }
 
-  writeUserData(data: string) {  // data is a object {---}
+  writeUserData(data: object) {  // data is a object {---}
     const user = this.afAuth.auth.currentUser,
       userID = user.uid;
     return this.af.database.ref('users/' + userID).set(data); // users/+ uid ---> path to the individual user data
   }
 
-  updateUserData(data: string) {
+  updateUserData(data: object) {
     const user = this.afAuth.auth.currentUser,
       userID = user.uid;
     return this.af.database.ref('users/' + userID).push(data);
