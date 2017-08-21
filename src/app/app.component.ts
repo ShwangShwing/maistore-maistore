@@ -75,6 +75,8 @@ export class AppComponent {
     return this.af.database.ref('products/').update(data);
   }
 
+  // firebase.database().ref('products/supplements').set(supplements)
+
   Send(desc: string) {
     this.items.push({ message: desc });
     this.msgVal = '';
