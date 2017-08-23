@@ -5,11 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class FooterComponent {
+  text = '© Telerik Academy 2012-2017';
 
 }

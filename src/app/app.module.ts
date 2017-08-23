@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+// import { TabsModule } from 'ngx-bootstrap/tabs';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -15,6 +17,7 @@ import { PublicModule } from './public/public.module';
 import { PrivateWorkerModule } from './private-worker/private-worker.module';
 
 import { appRoutes } from './app.routes';
+// import { appRoutes } from './app.routes';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCPR3i_Jba33tqXYD-2_MynK9DhqZNy_XQ',
@@ -39,6 +42,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes),
+    // TabsModule.forRoot(),
     PublicModule,
     PrivateWorkerModule
   ],
