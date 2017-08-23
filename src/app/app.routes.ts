@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './public/home/home.component';
-import { WorkersComponent } from './public/workers/workers.component';
-import { WorkerComponent } from './public/workers/worker/worker.component';
-import { WorkerProjectsComponent } from './public/workers/worker-projects/worker-projects.component';
 import { ProjectsComponent } from './public/projects/projects.component';
 import { ProjectComponent } from './public/projects/project/project.component';
 import { RegisterComponent } from './public/register/register.component';
@@ -17,9 +14,7 @@ export const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full'},
 
     { path: 'home', component: HomeComponent },
-    { path: 'workers', component: WorkersComponent },
-    { path: 'workers/:workerId', component: WorkerComponent },
-    { path: 'workers/:workerId/projects', component: WorkerProjectsComponent },
+    { path: 'workers', loadChildren: './public/workers/workers.module#WorkersModule' },
     { path: 'projects', component: ProjectsComponent },
     { path: 'projects/:projectId', component: ProjectComponent },
     { path: 'register', component: RegisterComponent },
