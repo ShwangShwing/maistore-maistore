@@ -6,8 +6,4 @@ import { competencyList } from '../../in-memory-data/competencies';
 export class CompetenciesService {
 
   constructor() { }
-
-  getAll() {
-    
-  }
 }

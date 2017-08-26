@@ -1,3 +1,8 @@
 <p>
   workers works!
 </p>
+<ul>
+  <li *ngFor='let worker of allWorkers$ | async'>
+    {{worker.name}}
+  </li>
+</ul>
