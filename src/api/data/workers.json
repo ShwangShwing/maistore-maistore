@@ -1,0 +1,42 @@
+[
+    {
+        "workerId": 1,
+        "workerName": "Ivan Bombata",
+        "workerUrl": "https://www.google.bg/url?sa=i&rct=j&q=&esrc=s&source=imgres&cd=&cad=rja&uact=8&ved=0ahUKEwjp8NnKu_fVAhUBsRQKHTOTAKEQjRwIBw&url=http%3A%2F%2Fwww.mascotdesigngallery.com%2Ftag%2Fworker%2F&psig=AFQjCNEzYd8YKYuvFVTMtn_fqvRiEtY-Lw&ust=1503925063229930",
+        "productCode": [],
+        "skills": [],
+        "starRating": 3.2
+    },
+    {
+        "workerId": 2,
+        "workerName": "Pesho Peshev",
+        "workerUrl": "https://www.google.bg/url?sa=i&rct=j&q=&esrc=s&source=imgres&cd=&cad=rja&uact=8&ved=0ahUKEwjp8NnKu_fVAhUBsRQKHTOTAKEQjRwIBw&url=http%3A%2F%2Fwww.mascotdesigngallery.com%2Ftag%2Fworker%2F&psig=AFQjCNEzYd8YKYuvFVTMtn_fqvRiEtY-Lw&ust=1503925063229930",
+        "productCode": [],
+        "skills": [],
+        "starRating": 4.2
+    },
+    {
+        "workerId": 5,
+        "workerName": "Billi Kid",
+        "workerUrl": "https://www.google.bg/url?sa=i&rct=j&q=&esrc=s&source=imgres&cd=&cad=rja&uact=8&ved=0ahUKEwjp8NnKu_fVAhUBsRQKHTOTAKEQjRwIBw&url=http%3A%2F%2Fwww.mascotdesigngallery.com%2Ftag%2Fworker%2F&psig=AFQjCNEzYd8YKYuvFVTMtn_fqvRiEtY-Lw&ust=1503925063229930",
+        "productCode": [],
+        "skills": [],
+        "starRating": 4.8
+    },
+    {
+        "workerId": 8,
+        "workerName": "Sam Neal",
+        "workerUrl": "https://www.google.bg/url?sa=i&rct=j&q=&esrc=s&source=imgres&cd=&cad=rja&uact=8&ved=0ahUKEwjp8NnKu_fVAhUBsRQKHTOTAKEQjRwIBw&url=http%3A%2F%2Fwww.mascotdesigngallery.com%2Ftag%2Fworker%2F&psig=AFQjCNEzYd8YKYuvFVTMtn_fqvRiEtY-Lw&ust=1503925063229930",
+        "productCode": [],
+        "skills": [],
+        "starRating": 3.7
+    },
+    {
+        "workerId": 10,
+        "workerName": "Sean Penn",
+        "workerUrl": "https://www.google.bg/url?sa=i&rct=j&q=&esrc=s&source=imgres&cd=&cad=rja&uact=8&ved=0ahUKEwjp8NnKu_fVAhUBsRQKHTOTAKEQjRwIBw&url=http%3A%2F%2Fwww.mascotdesigngallery.com%2Ftag%2Fworker%2F&psig=AFQjCNEzYd8YKYuvFVTMtn_fqvRiEtY-Lw&ust=1503925063229930",
+        "productCode": [],
+        "skills": [],
+        "starRating": 4.6
+    }
+]

@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // import { TabsModule } from 'ngx-bootstrap/tabs';
 
@@ -17,7 +18,6 @@ import { PublicModule } from './public/public.module';
 import { PrivateWorkerModule } from './private-worker/private-worker.module';
 
 import { appRoutes } from './app.routes';
-// import { appRoutes } from './app.routes';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCPR3i_Jba33tqXYD-2_MynK9DhqZNy_XQ',
@@ -38,6 +38,7 @@ export const firebaseConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
