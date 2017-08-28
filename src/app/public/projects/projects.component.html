@@ -1,3 +1,33 @@
 <p>
-  projects works!
+  Add filters here
 </p>
+
+<div class='panel panel-primary'>
+  <div class='panel-body'>
+      <div class='table-responsive'>
+          <table class='table'
+                  *ngIf='projects && projects.length'>
+              <thead>
+                  <tr>
+                      <th>Project</th>
+                      <th>Worker</th>
+                      <th>competencies</th>
+                      <th>Images</th>
+                      <th>5 Star Rating</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor='let worker of allProjects'>
+                      <td><a >
+                              {{ project.name }}
+                          </a>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+<div *ngIf='errorMessage' class='alert alert-danger'>
+  Error: {{ errorMessage }}
+</div>
