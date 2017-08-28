@@ -6,6 +6,7 @@ import { WorkersModule } from './workers/workers.module';
 import { ProjectsModule } from './projects/projects.module';
 import { RegisterModule } from './register/register.module';
 import { LoginModule } from './login/login.module';
+import { LogoutModule } from './logout/logout.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { LoginModule } from './login/login.module';
     WorkersModule,
     ProjectsModule,
     RegisterModule,
-    LoginModule
+    LoginModule,
+    LogoutModule
   ],
   declarations: []
 })

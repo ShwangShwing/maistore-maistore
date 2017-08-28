@@ -3,8 +3,7 @@ import { CompletedProjectModel } from './completed-project.model';
 
 export interface WorkerModel {
     id: string;
-    username: string;
-    passwordHash: string;
+    userId: string;
     name: string;
     competencies: CompetencyModel[];
     completedProjects: CompletedProjectModel[];

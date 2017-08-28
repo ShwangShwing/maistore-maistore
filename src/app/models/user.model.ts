@@ -1,5 +1,5 @@
 export interface UserModel {
-    id: string;
-    username: string;
-    passwordHash: string;
+    userId: string;
+    name: string;
+    type: string;
 }
