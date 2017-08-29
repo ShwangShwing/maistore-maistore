@@ -2,24 +2,34 @@ import { UserModel } from '../models/user.model';
 
 const userList: UserModel[] = [
     {
-        id: '1',
-        username: 'Pesho',
-        passwordHash: 'no-password-hash'
+        userId: '1',
+        name: 'Pesho',
+        type: 'user'
     },
     {
-        id: '2',
-        username: 'Gosho',
-        passwordHash: 'no-password-hash'
+        userId: '2',
+        name: 'Tosho',
+        type: 'user'
     },
     {
-        id: '3',
-        username: 'Tosho',
-        passwordHash: 'no-password-hash'
+        userId: '3',
+        name: 'NeZnam',
+        type: 'user'
     },
     {
-        id: '4',
-        username: 'Misho',
-        passwordHash: 'no-password-hash'
+        userId: '4',
+        name: 'Maistor Gele',
+        type: 'worker'
+    },
+    {
+        userId: '5',
+        name: 'Stamat Elektricheskia',
+        type: 'worker'
+    },
+    {
+        userId: '6',
+        name: 'Tosho Vodoprovodchika',
+        type: 'worker'
     },
 ];
 

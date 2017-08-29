@@ -1,3 +1,20 @@
-<p>
-  register works!
-</p>
+<div>
+  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+    <div>
+      <label for="user-or-worker">Type</label>
+      <select id="user-or-worker" (ngModel)="type" name="type">
+        <option value="user">User</option>
+        <option value="worker">Worker</option>
+      </select>
+    </div>
+    <div>
+      <label for="email">E-mail</label>
+      <input type="email"  (ngModel)="email" name="email" id="email" placeholder="email">
+    </div>
+    <div>
+      <label for="password">Passowrd</label>
+      <input type="password" (ngModel)="password" name="password" id="password" placeholder="password">
+    </div>
+    <div><button type="submit">Register</button></div>
+  </form>
+</div>

@@ -8,7 +8,9 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-// import { TabsModule } from 'ngx-bootstrap/tabs';
+import { environment } from '../environments/environment';
+
+import { AuthService } from './services/auth.service';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -18,14 +20,6 @@ import { PrivateWorkerModule } from './private-worker/private-worker.module';
 
 import { appRoutes } from './app.routes';
 
-export const firebaseConfig = {
-  apiKey: 'AIzaSyCPR3i_Jba33tqXYD-2_MynK9DhqZNy_XQ',
-  authDomain: 'maistore-maistore.firebaseapp.com',
-  databaseURL: 'https://maistore-maistore.firebaseio.com',
-  projectId: 'maistore-maistore',
-  storageBucket: 'maistore-maistore.appspot.com',
-  messagingSenderId: '639190553847'
-};
 
 @NgModule({
   declarations: [
@@ -37,15 +31,14 @@ export const firebaseConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes),
-    // TabsModule.forRoot(),
     PublicModule,
     PrivateWorkerModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

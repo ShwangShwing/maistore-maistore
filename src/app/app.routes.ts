@@ -7,6 +7,7 @@ import { ProjectsComponent } from './public/projects/projects.component';
 import { ProjectComponent } from './public/projects/project/project.component';
 import { RegisterComponent } from './public/register/register.component';
 import { LoginComponent } from './public/login/login.component';
+import { LogoutComponent } from './public/logout/logout.component';
 
 import { ProfileComponent } from './private-worker/profile/profile.component';
 import { LoggedWorkerProjectsComponent } from './private-worker/logged-worker-projects/logged-worker-projects.component';
@@ -24,12 +25,12 @@ export const appRoutes: Routes = [
     { path: 'projects/:projectId', component: ProjectComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'logout', component: LogoutComponent },
 
     { path: 'profile', component: ProfileComponent },
     { path: 'logged-worker-projects', component: LoggedWorkerProjectsComponent },
     { path: 'new-worker-project', component: NewWorkerProjectComponent },
     { path: 'edit-worker-project/:projectId', component: EditWorkerProjectComponent },
-
 
     { path: '**', redirectTo: 'home'},
 ];

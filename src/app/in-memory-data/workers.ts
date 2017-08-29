@@ -3,9 +3,8 @@ import { WorkerModel } from '../models/worker.model';
 const workerList: WorkerModel[] = [
     {
         id: '1',
-        username: 'MaistorGele',
-        passwordHash: 'no-password',
         name: 'Maistor Gele',
+        userId: '4',
         competencies: [
             {
                 id: '1',
@@ -49,9 +48,8 @@ const workerList: WorkerModel[] = [
     },
     {
         id: '2',
-        username: 'StamatElektroto',
-        passwordHash: 'no-password',
         name: 'Stamat Elektricheskia',
+        userId: '5',
         competencies: [
             {
                 id: '5',
@@ -63,8 +61,7 @@ const workerList: WorkerModel[] = [
     },
     {
         id: '3',
-        username: 'Tosho',
-        passwordHash: 'no-password',
+        userId: '6',
         name: 'Tosho Vodoprovodchika',
         competencies: [
             {
