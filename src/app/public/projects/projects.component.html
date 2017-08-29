@@ -1,3 +1,38 @@
 <p>
-  projects works!
+  Add filters here
 </p>
+
+<div class='panel panel-primary'>
+  <div class='panel-body'>
+      <div class='table-responsive'>
+          <table class='table' *ngIf='projects;else no_results'>
+              <thead>
+                  <tr>
+                      <th>Project</th>
+                      <th>Worker</th>
+                      <th>competencies</th>
+                      <th>Images</th>
+                      <th>Rating</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor='let project of projects   '>
+                      <td><a href='/projects/{{project.id}}'>{{project.name}}</a></td>
+                      <td>{{worker.username}}</td>
+                      <td>
+                          <div class='row' *ngFor='let competency of project.competencies'>
+                              <div class='col-md-4'>{{competency.name}}</div>
+                          </div>
+                          </td>
+                      <td><img src='{{project.picturePaths[0]}}' class='grid-image' /></td>
+                      <td>{{project.userRatings[0].rating }}</td>
+                  </tr>
+              </tbody>
+          </table>
+          <ng-template #no_results>No results found</ng-template>
+      </div>
+  </div>
+</div>
+<div *ngIf='errorMessage' class='alert alert-danger'>
+  Error: {{ errorMessage }}
+</div>
