@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { CompletedProjectModel } from '../../models/completed-project.model';
 import { CompletedProjectsService } from '../../services/data/completed-projects.service';
+import { WorkersService } from '../../services/data/workers.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,11 +11,20 @@ import { CompletedProjectsService } from '../../services/data/completed-projects
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  allProjects: Observable<CompletedProjectModel[]>;
+  public projects: CompletedProjectModel[];
+  public worker: object;
 
-  constructor(private projectsService: CompletedProjectsService) { }
+  constructor(private projectsService: CompletedProjectsService, private workersService: WorkersService) {
+    
+   }
 
   ngOnInit() {
-    this.allProjects = this.projectsService.getAll();
-  }
+    this.projectsService.getAll()
+    .subscribe(
+      data => {
+        this.projects = data;
+        this.worker = this.workersService.getWorker(this.projects[0].workerId);
+      }
+    )
+  };
 }

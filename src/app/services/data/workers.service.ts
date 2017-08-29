@@ -44,8 +44,7 @@ export class WorkersService {
   }
 
   updateWorkerCompetencies(workerId: string, competencyIds: string[]): void {
-    const worker = workerList.find(curWorker => curWorker.id === workerId);
-
+    const worker = this.getWorker(workerId);
     if (!worker) {
       return;
     }
@@ -62,4 +61,7 @@ export class WorkersService {
 
     this.workers$.next(workerList);
   }
+   getWorker(workerId: string) {
+    return workerList.find(curWorker => curWorker.id === workerId);
+   }
 }

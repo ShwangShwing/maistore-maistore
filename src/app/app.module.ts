@@ -17,7 +17,6 @@ import { PublicModule } from './public/public.module';
 import { PrivateWorkerModule } from './private-worker/private-worker.module';
 
 import { appRoutes } from './app.routes';
-// import { appRoutes } from './app.routes';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCPR3i_Jba33tqXYD-2_MynK9DhqZNy_XQ',
