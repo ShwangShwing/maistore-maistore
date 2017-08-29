@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http';
 import { environment } from '../environments/environment';
 
 import { AuthService } from './services/auth.service';
+import { UsersService } from './services/data/users.service';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -38,7 +39,10 @@ import { appRoutes } from './app.routes';
     PublicModule,
     PrivateWorkerModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    UsersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

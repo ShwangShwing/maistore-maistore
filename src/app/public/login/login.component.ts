@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -9,12 +10,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   onSubmit(formData) {
-    this.authService.login(formData.value.email, formData.value.password);
+    this.authService.login(formData.value.email, formData.value.password)
+      .then(() => {
+        this.router.navigate(['home']);
+      });
   }
 }

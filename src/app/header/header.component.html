@@ -32,7 +32,7 @@
           <li [routerLinkActive]="['active']"><a *ngIf="!(user | async)?.uid" routerLink="/login">Login</a></li>
           <li [routerLinkActive]="['active']"><a *ngIf="!(user | async)?.uid" routerLink="/register">Register</a></li>
           <li *ngIf="(user | async)?.uid" class="dropdown">
-            <a href="#" class="dropdown-toggle" *ngIf="(user | async)?.uid" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{(user | async).email}} <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" *ngIf="(user | async)?.uid" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{(user | async)?.email}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li [routerLinkActive]="['active']"><a routerLink="/profile">Profile</a></li>
               <li [routerLinkActive]="['active']"><a routerLink="/logged-worker-projects">My Projects</a></li>
