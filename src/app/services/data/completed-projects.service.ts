@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { CompletedProjectModel } from '../../models/completed-project.model';
-
-import { completedProjectList } from '../../in-memory-data/completedProjects';
+import { calculateAverageRating } from '../../helpers/arithmetic-helpers';
 
 @Injectable()
 export class CompletedProjectsService {
-  private completedProjects$: BehaviorSubject<CompletedProjectModel[]>;
+  private completedProjects$: FirebaseListObservable<CompletedProjectModel[]>;
+  private allProjects: CompletedProjectModel[];
 
-  constructor() {
-    this.completedProjects$ = new BehaviorSubject<CompletedProjectModel[]>(completedProjectList);
+  constructor(private af: AngularFireDatabase) {
+    this.completedProjects$ = this.af.list('completedProjects');
+
+    this.completedProjects$.subscribe(projectList => {
+      this.allProjects = projectList;
+    });
   }
 
   getAll(): Observable<CompletedProjectModel[]> {
@@ -19,60 +23,39 @@ export class CompletedProjectsService {
   }
 
   addProject(newCompletedProject: CompletedProjectModel): void {
-    // const worker = workerList.find(w => w.id === newCompletedProject.workerId);
-    // if (!worker) {
-    //   return;
-    // }
-
-    // completedProjectList.push(newCompletedProject);
-    // worker.completedProjects.push(newCompletedProject);
-    // this.completedProjects$.next(completedProjectList);
+    const pushedProjectKey = this.completedProjects$.push(newCompletedProject);
+    this.af.object(`workers/${newCompletedProject.workerId}/completedProjects/${pushedProjectKey}`)
+      .set(newCompletedProject);
   }
 
   rateProject(projectId: string, userId: string, rating: number) {
-    // const project = completedProjectList.find(p => p.id === projectId);
-    // if (!project) {
-    //   return;
-    // }
-
-    // const userRating = project.userRatings.find(u => u.userId === userId);
-    // if (rating) {
-    //   userRating.rating = rating;
-    // } else {
-    //   project.userRatings.push({userId, rating});
-    // }
-
-    // const worker = workerList.find(w => w.id === project.workerId);
-    // if (!worker) {
-    //   return;
-    // }
-
-    // for (let i = 0; i < worker.completedProjects.length; i++) {
-    //   if (worker.completedProjects[i].id === project.workerId) {
-    //     worker.completedProjects[i] = project;
-    //     return;
-    //   }
-    // }
+    this.af.object(`completedProjects/${projectId}/userRatings/${userId}`).set({ rating });
   }
 
   addPictureToProject(projectId: string, picturePath: string) {
-    // const project = completedProjectList.find(p => p.id === projectId);
-    // if (!project) {
-    //   return;
-    // }
+    // TODO!!
+  }
 
-    // project.picturePaths.push(picturePath);
+  getProjectsByFilter(competencyIds: string[], minRating: number) {
+    return this.allProjects.filter(project => {
+      const averageRating = calculateAverageRating(project.userRatings);
+      if (averageRating < minRating) {
+        return false;
+      }
 
-    // const worker = workerList.find(w => w.id === project.workerId);
-    // if (!worker) {
-    //   return;
-    // }
+      let projectHasCompetency = false;
+      for (let i = 0; i < competencyIds.length; i++) {
+        if (typeof project.competencies[competencyIds[i]] !== 'undefined') {
+          projectHasCompetency = true;
+          break;
+        }
+      }
 
-    // for (let i = 0; i < worker.completedProjects.length; i++) {
-    //   if (worker.completedProjects[i].id === project.workerId) {
-    //     worker.completedProjects[i].picturePaths.push(picturePath);
-    //     return;
-    //   }
-    // }
+      if (!projectHasCompetency) {
+        return false;
+      }
+
+      return true;
+    });
   }
 }
