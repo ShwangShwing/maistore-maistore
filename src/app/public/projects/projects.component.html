@@ -5,7 +5,7 @@
 <div class='panel panel-primary'>
   <div class='panel-body'>
       <div class='table-responsive'>
-          <table class='table' *ngIf='projects;else no_results'>
+          <table class='table' *ngIf='(projects$ | async);else no_results'>
               <thead>
                   <tr>
                       <th>Project</th>
@@ -16,12 +16,12 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor='let project of projects   '>
+                  <tr *ngFor='let project of (projects$ | async);'>
                       <td><a href='/projects/{{project.id}}'>{{project.name}}</a></td>
-                      <td>{{worker.username}}</td>
+                      <td>{{(getWorker(project.workerId) | async).name}}</td>
                       <td>
-                          <div class='row' *ngFor='let competency of project.competencies'>
-                              <div class='col-md-4'>{{competency.name}}</div>
+                          <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>
+                              <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
                           </div>
                           </td>
                       <td><img src='{{project.picturePaths[0]}}' class='grid-image' /></td>

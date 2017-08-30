@@ -16,6 +16,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(formData) {
-    this.authService.register(formData.value.type, formData.value.email, formData.value.password);
+    this.authService.register(
+      formData.value.type,
+      formData.value.name,
+      formData.value.email,
+      formData.value.password);
   }
 }

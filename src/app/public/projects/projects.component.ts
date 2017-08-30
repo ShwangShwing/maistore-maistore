@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
+import { KeysPipe } from '../../pipes/keys.pipe';
 import { CompletedProjectModel } from '../../models/completed-project.model';
+import { WorkerModel } from '../../models/worker.model';
+
 import { CompletedProjectsService } from '../../services/data/completed-projects.service';
 import { WorkersService } from '../../services/data/workers.service';
 
@@ -11,20 +13,17 @@ import { WorkersService } from '../../services/data/workers.service';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  public projects: CompletedProjectModel[];
-  public worker: object;
+  public projects$: Observable<CompletedProjectModel[]>;
 
-  constructor(private projectsService: CompletedProjectsService, private workersService: WorkersService) {
-    
-   }
+  constructor(
+    private projectsService: CompletedProjectsService,
+    private workersService: WorkersService) {}
 
   ngOnInit() {
-    this.projectsService.getAll()
-    .subscribe(
-      data => {
-        this.projects = data;
-        this.worker = this.workersService.getWorker(this.projects[0].workerId);
-      }
-    )
-  };
+    this.projects$ = this.projectsService.getAll();
+  }
+
+  getWorker(workerId): Observable<WorkerModel> {
+    return this.workersService.getById(workerId);
+  }
 }

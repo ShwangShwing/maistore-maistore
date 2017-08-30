@@ -1,67 +1,70 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
+import { calculateAverageRating } from '../../helpers/arithmetic-helpers';
 
 import { WorkerModel } from '../../models/worker.model';
 import { CompetencyModel } from '../../models/competency.model';
 
-import { workerList } from '../../in-memory-data/workers';
-import { competencyList } from '../../in-memory-data/competencies';
 
 @Injectable()
 export class WorkersService {
-  private workers$: BehaviorSubject<WorkerModel[]>;
+  private workers$: FirebaseListObservable<WorkerModel[]>;
+  private allWorkers: WorkerModel[];
 
-  constructor() {
-    this.workers$ = new BehaviorSubject<WorkerModel[]>(workerList);
+  constructor(private af: AngularFireDatabase) {
+    this.workers$ = this.af.list('workers');
+
+    this.workers$.subscribe(workerList => {
+      this.allWorkers = workerList;
+    });
   }
 
   getAll(): Observable<WorkerModel[]> {
     return this.workers$;
   }
 
+  getById(id: string) {
+    return this.af.object(`workers/${id}`);
+  }
+
   addWorker(worker: WorkerModel): void {
-    workerList.push(worker);
-    this.workers$.next(workerList);
+    this.workers$.push(worker);
   }
 
   rateWorker(workerId: string, userId: string, rating: number): void {
-    const worker = workerList.find(curWorker => curWorker.id === workerId);
-
-    if (!worker) {
-      return;
-    }
-
-    const userRating = worker.userRatings.find(u => u.userId === userId);
-
-    if (rating) {
-      userRating.rating = rating;
-    } else {
-      worker.userRatings.push({userId, rating});
-    }
-
-    this.workers$.next(workerList);
+    this.af.object(`workers/${workerId}/userRatings/${userId}`).set({ rating });
   }
 
-  updateWorkerCompetencies(workerId: string, competencyIds: string[]): void {
-    const worker = this.getWorker(workerId);
-    if (!worker) {
-      return;
-    }
+  updateWorkerCompetencies(workerId: string, competencies: CompetencyModel[]): void {
+    this.af.object(`workers/${workerId}/competencies`).set(competencies);
+  }
 
-    const updatedWorkerCompetencies = [];
-    competencyIds.forEach(competencyId => {
-      const curCompetency = competencyList.find(comp => comp.id === competencyId);
-      if (curCompetency) {
-        updatedWorkerCompetencies.push(curCompetency);
+  getWorkersByName(workerName: string): WorkerModel[] {
+    return this.allWorkers.filter(worker => worker.name.indexOf(workerName) >= 0);
+  }
+
+  getWorkersByFilter(competencyIds: string[], minRating: number) {
+    return this.allWorkers.filter(worker => {
+      const averageRating = calculateAverageRating(worker.userRatings);
+      if (averageRating < minRating) {
+        return false;
       }
+
+      let workerHasCompetency = false;
+      for (let i = 0; i < competencyIds.length; i++) {
+        if (typeof worker.competencies[competencyIds[i]] !== 'undefined') {
+          workerHasCompetency = true;
+          break;
+        }
+      }
+
+      if (!workerHasCompetency) {
+        return false;
+      }
+
+      return true;
     });
-
-    worker.competencies = updatedWorkerCompetencies;
-
-    this.workers$.next(workerList);
   }
-   getWorker(workerId: string) {
-    return workerList.find(curWorker => curWorker.id === workerId);
-   }
 }
