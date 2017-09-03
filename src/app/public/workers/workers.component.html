@@ -1,8 +1,35 @@
 <p>
-  workers works!
+  Add filters here
 </p>
-<ul>
-  <li *ngFor='let worker of allWorkers$ | async'>
-    {{worker.name}}
-  </li>
-</ul>
+
+<div class='panel panel-primary'>
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='(allWorkers$ | async);else no_results'>
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Progects</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let worker of allWorkers$ | async'>
+                        <td>
+                          <img src='{{worker.photo}}' class='grid-image' />
+                        </td>
+                        <td><a href='/workers/{{worker.userId}}'>{{worker.name}}</a></td>
+                        <td>
+                            <!-- <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>
+                                <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
+                            </div> -->
+                        </td>
+                </tbody>
+            </table>
+            <ng-template #no_results>No results found</ng-template>
+        </div>
+    </div>
+</div>
+<div *ngIf='errorMessage' class='alert alert-danger'>
+    Error: {{ errorMessage }}
+</div>

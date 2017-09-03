@@ -11,8 +11,9 @@ import { WorkersService } from '../../services/data/workers.service';
 })
 export class WorkersComponent implements OnInit {
   allWorkers$: Observable<WorkerModel[]>;
-
-  constructor(private workersService: WorkersService) { }
+  
+  $photo: '../../../assets/worker.png';
+  constructor(private workersService: WorkersService) {}
 
   ngOnInit() {
     this.allWorkers$ = this.workersService.getAll();
