@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './public/home/home.component';
 import { WorkersComponent } from './public/workers/workers.component';
 import { WorkerComponent } from './public/workers/worker/worker.component';
