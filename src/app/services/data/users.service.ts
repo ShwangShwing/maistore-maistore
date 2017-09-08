@@ -15,6 +15,15 @@ export class UsersService {
     return this.af.object(`users/${id}`);
   }
 
+  // A little confusing here. User id is the id of the firebase login user
+  // This should return an array of one element because angular...
+  getByUserId(userId: string) {
+    return this.af.list(`users`, {query: {
+      orderByChild: 'userId',
+      equalTo: userId
+    }});
+  }
+
   addUser(newUser: UserModel) {
     this.users$.push(newUser);
   }

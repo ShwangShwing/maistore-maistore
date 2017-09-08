@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { UserModel } from '../models/user.model';
 import { WorkerModel } from '../models/worker.model';
@@ -11,24 +12,18 @@ import { WorkersService } from './data/workers.service';
 
 @Injectable()
 export class AuthService {
-  private authState: Observable<firebase.User>;
-  private currentUser: firebase.User = null;
+  private authState$: Observable<firebase.User>;
 
-  constructor(private afAuth: AngularFireAuth,
+  constructor(private af: AngularFireDatabase,
+    private afAuth: AngularFireAuth,
     private usersService: UsersService,
     private workersService: WorkersService) {
-    this.authState = this.afAuth.authState;
-    this.authState.subscribe(user => {
-      if (user) {
-        this.currentUser = user;
-      } else {
-        this.currentUser = null;
-      }
-    });
+
+    this.authState$ = this.afAuth.authState;
   }
 
   getAuthState() {
-    return this.authState;
+    return this.authState$;
   }
 
   register(type: string, name: string, email: string, password: string): Promise<any> {
