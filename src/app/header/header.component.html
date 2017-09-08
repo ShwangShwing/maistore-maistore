@@ -23,9 +23,9 @@
             {{(ourUser$ | async)[0].name}} ({{(firebaseUser$ | async)?.email}}) <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li [routerLinkActive]="['active']"><a routerLink="/profile">Profile</a></li>
-            <li [routerLinkActive]="['active']"><a routerLink="/logged-worker-projects">My Projects</a></li>
-            <li role="separator" class="divider"></li>
+            <li *ngIf="(ourUser$ | async)[0].type == 'worker'" [routerLinkActive]="['active']"><a routerLink="/profile">Profile</a></li>
+            <li *ngIf="(ourUser$ | async)[0].type == 'worker'" [routerLinkActive]="['active']"><a routerLink="/logged-worker-projects">My Projects</a></li>
+            <li *ngIf="(ourUser$ | async)[0].type == 'worker'" role="separator" class="divider"></li>
             <li><a (click)="doLogout()" routerLink="/logout">Logout</a></li>
           </ul>
         </li>
