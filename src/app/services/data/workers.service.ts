@@ -30,15 +30,21 @@ export class WorkersService {
   }
 
   addWorker(worker: WorkerModel): void {
-    this.workers$.push(worker);
+    this.workers$.update(worker.userId, worker);
   }
 
   rateWorker(workerId: string, userId: string, rating: number): void {
     this.af.object(`workers/${workerId}/userRatings/${userId}`).set({ rating });
   }
 
-  updateWorkerCompetencies(workerId: string, competencies: CompetencyModel[]): void {
+  updateWorker(workerId: string, name: string, competencies: CompetencyModel[]): void {
     this.af.object(`workers/${workerId}/competencies`).set(competencies);
+    this.af.object(`workers/${workerId}/name`).set(name);
+    this.af.object(`users/${workerId}/name`).set(name);
+  }
+
+  setWorkerPicUrl(workerId: string, picUrl: string) {
+    this.af.object(`workers/${workerId}/picUrl`).set(picUrl);
   }
 
   getWorkersByName(workerName: string): WorkerModel[] {

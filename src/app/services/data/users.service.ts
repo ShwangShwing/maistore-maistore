@@ -25,6 +25,6 @@ export class UsersService {
   }
 
   addUser(newUser: UserModel) {
-    this.users$.push(newUser);
+    this.users$.update(newUser.userId, newUser);
   }
 }

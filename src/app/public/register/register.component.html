@@ -1,24 +1,32 @@
-<div>
-  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
-    <div>
-      <label for="user-or-worker">Type</label>
-      <select id="user-or-worker" (ngModel)="type" name="type">
-        <option value="user">User</option>
-        <option value="worker">Worker</option>
-      </select>
-    </div>
-    <div>
-      <label for="name">Name</label>
-      <input type="text"  (ngModel)="name" name="name" id="name" placeholder="name">
-    </div>
-    <div>
-      <label for="email">E-mail</label>
-      <input type="email"  (ngModel)="email" name="email" id="email" placeholder="email">
-    </div>
-    <div>
-      <label for="password">Passowrd</label>
-      <input type="password" (ngModel)="password" name="password" id="password" placeholder="password">
-    </div>
-    <div><button type="submit">Register</button></div>
-  </form>
+<div class='panel panel-primary'>
+  <div class="panel-heading">Register</div>
+  <div class="panel-body">  
+      <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+        <div class="form-group">
+          <div>
+            <label for="user-or-worker">Type</label>
+            <select id="user-or-worker" (ngModel)="type" name="type" class="form-control">
+              <option value="user">User</option>
+              <option value="worker">Worker</option>
+            </select>
+          </div>
+          <div>
+            <label for="name">Name</label>
+            <input type="text"  (ngModel)="name" name="name" id="name" placeholder="name" class="form-control">
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input type="email"  (ngModel)="email" name="email" id="email" placeholder="email" class="form-control">
+          </div>
+          <div>
+            <label for="password">Passowrd</label>
+            <input type="password" (ngModel)="password" name="password" id="password" placeholder="password" class="form-control">
+          </div>
+          <div><button type="submit" class="btn btn-default">Register</button></div>
+        </div>
+      </form>
+    </div>    
+  <div *ngIf="error" class="panel-footer">
+    <div class="alert alert-danger">{{ error }}</div>
+  </div>
 </div>
