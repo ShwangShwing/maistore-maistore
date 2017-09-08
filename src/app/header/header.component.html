@@ -16,10 +16,12 @@
         <li [routerLinkActive]="['active']"><a routerLink="/projects">Projects</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li [routerLinkActive]="['active']"><a *ngIf="!(user | async)?.uid" routerLink="/login">Login</a></li>
-        <li [routerLinkActive]="['active']"><a *ngIf="!(user | async)?.uid" routerLink="/register">Register</a></li>
-        <li *ngIf="(user | async)?.uid" class="dropdown">
-          <a href="#" class="dropdown-toggle" *ngIf="(user | async)?.uid" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{(user | async)?.email}} <span class="caret"></span></a>
+        <li [routerLinkActive]="['active']"><a *ngIf="!(firebaseUser$ | async)?.uid" routerLink="/login">Login</a></li>
+        <li [routerLinkActive]="['active']"><a *ngIf="!(firebaseUser$ | async)?.uid" routerLink="/register">Register</a></li>
+        <li *ngIf="(firebaseUser$ | async)?.uid" class="dropdown">
+          <a href="#" class="dropdown-toggle" *ngIf="(firebaseUser$ | async)?.uid" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            {{(ourUser$ | async)[0].name}} ({{(firebaseUser$ | async)?.email}}) <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li [routerLinkActive]="['active']"><a routerLink="/profile">Profile</a></li>
             <li [routerLinkActive]="['active']"><a routerLink="/logged-worker-projects">My Projects</a></li>

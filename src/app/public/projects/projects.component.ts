@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { KeysPipe } from '../../pipes/keys.pipe';
+
 import { CompletedProjectModel } from '../../models/completed-project.model';
 import { WorkerModel } from '../../models/worker.model';
 
