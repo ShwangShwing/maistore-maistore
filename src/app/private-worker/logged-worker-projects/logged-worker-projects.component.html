@@ -1,3 +1,56 @@
-<p>
-  logged-worker-projects works!
-</p>
+<div class='panel panel-primary'>
+  <div class="panel-heading">
+    Your projects
+  </div>
+  <div class='panel-body'>
+      <div class='table-responsive'>
+          <table class='table' *ngIf='(projects$ | async).length > 0;else no_results'>
+              <thead>
+                  <tr>
+                      <th>Project</th>
+                      <th>competencies</th>
+                      <th>Rating</th>
+                      <th>Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor='let project of (projects$ | async);'>
+                      <td><a href='edit-worker-project/{{project.id}}'>{{project.name}}</a></td>
+                      <td>
+                          <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>
+                              <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
+                          </div>
+                      </td>
+                      <td>{{project.userRatings | rating }}</td>
+                      <td>
+                        <div>
+                          <button *ngIf="project.id !== projectIdForDelete" type="submit" class="btn btn-danger delete-button" (click)="deleteProject(project.id)">Delete</button>
+                          <button *ngIf="project.id === projectIdForDelete" type="submit" class="btn btn-danger confirm-delete-button" (click)="reallyDeleteProject(project.id)">Confirm Delete</button>
+                          <button *ngIf="project.id === projectIdForDelete" type="submit" class="btn btn-cancel cancel-delete-button" (click)="cancelDeleteProject()">Don't Delete</button>
+                        </div>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          <ng-template #no_results>You don't have any projects yet</ng-template>
+      </div>
+      <div>
+        <div>New Project:
+          <div class="form-group">
+            <div>
+              <label for="project-name">name</label>
+              <input type="text"  [(ngModel)]="newProjectName" name="project-name" id="project-name" placeholder="New Project Name" class="form-control">
+            </div>
+            <div>
+              <div *ngFor="let competency of (competencies$ | async)" type="checkbox">
+                  <label>
+                  <input type="checkbox" [(ngModel)]="checkedCompetencies[competency.name]">
+                    {{competency.name}}
+                  </label>
+                </div>
+            </div>
+            <div><button type="submit" class="btn btn-default" (click)="createNewProject()">Add Project</button></div>
+          </div>
+      </div>
+  </div>
+</div>

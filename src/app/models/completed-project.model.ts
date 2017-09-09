@@ -1,7 +1,7 @@
 import { CompetencyModel } from './competency.model';
 
 export interface CompletedProjectModel {
-    id: string;
+    id?: string;
     name: string;
     workerId: string;
     competencies: CompetencyModel[];

@@ -1,0 +1,7 @@
+.delete-button {
+    width: 26ch;
+}
+
+.confirm-delete-button, .cancel-delete-button {
+    width: 13ch;
+}

@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class RatingPipe implements PipeTransform {
 
   transform(ratings: any[]): string {
-    if (ratings.length <= 0) {
+    if (!ratings || ratings.length <= 0) {
       return '0.0 / 5 (0 ratings)';
     }
 

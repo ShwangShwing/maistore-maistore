@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { ProjectsComponent } from './projects.component';
 import { ProjectModule } from './project/project.module';
 import { CompletedProjectsService } from '../../services/data/completed-projects.service';
+
 import { RouterModule } from '@angular/router';
-import { appRoutes } from '../../app.routes';
-import { KeysPipe } from '../../pipes/keys.pipe';
+
+
+import { PipesModule } from '../../pipes/pipes.module';
+
 
 @NgModule({
   imports: [
-    RouterModule.forChild(appRoutes),
+    RouterModule,
     CommonModule,
-    ProjectModule
+    ProjectModule,
+    PipesModule
   ],
-  declarations: [ProjectsComponent, KeysPipe],
+  declarations: [ProjectsComponent],
   providers: [CompletedProjectsService]
 })
 export class ProjectsModule { }

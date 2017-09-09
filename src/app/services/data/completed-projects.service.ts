@@ -26,18 +26,33 @@ export class CompletedProjectsService {
     return this.af.object(`completedProjects/${projectId}`);
   }
 
-  addProject(newCompletedProject: CompletedProjectModel): void {
-    const pushedProjectKey = this.completedProjects$.push(newCompletedProject);
-    this.af.object(`workers/${newCompletedProject.workerId}/completedProjects/${pushedProjectKey}`)
-      .set(newCompletedProject);
+  getWorkerProjects(workerId: string): Observable<CompletedProjectModel[]> {
+    return this.af.list(`workers/${workerId}/completedProjects`);
+  }
+
+  addProject(newCompletedProject: CompletedProjectModel) {
+    return this.completedProjects$.push(newCompletedProject)
+      .then(item => {
+        newCompletedProject.id = item.key;
+
+        this.af.object(`completedProjects/${newCompletedProject.id}/id`).set(newCompletedProject.id);
+        return this.af.object(`workers/${newCompletedProject.workerId}/completedProjects/${item.key}`)
+        .set(newCompletedProject);
+      });
+  }
+
+  editProject(project: CompletedProjectModel) {
+    this.af.object(`completedProjects/${project.id}`).update(project);
+    this.af.object(`workers/${project.workerId}/completedProjects/${project.id}`).update(project);
+  }
+
+  deleteProject(workerId: string, projectId: string) {
+    this.af.object(`completedProjects/${projectId}`).remove();
+    this.af.object(`workers/${workerId}/completedProjects/${projectId}`).remove();
   }
 
   rateProject(projectId: string, userId: string, rating: number) {
     this.af.object(`completedProjects/${projectId}/userRatings/${userId}`).set({ rating });
-  }
-
-  addPictureToProject(projectId: string, picturePath: string) {
-    // TODO!!
   }
 
   getProjectsByFilter(competencyIds: string[], minRating: number) {

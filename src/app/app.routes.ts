@@ -11,7 +11,6 @@ import { LogoutComponent } from './public/logout/logout.component';
 
 import { ProfileComponent } from './private-worker/profile/profile.component';
 import { LoggedWorkerProjectsComponent } from './private-worker/logged-worker-projects/logged-worker-projects.component';
-import { NewWorkerProjectComponent } from './private-worker/new-worker-project/new-worker-project.component';
 import { EditWorkerProjectComponent } from './private-worker/edit-worker-project/edit-worker-project.component';
 
 export const appRoutes: Routes = [
@@ -29,7 +28,6 @@ export const appRoutes: Routes = [
 
     { path: 'profile', component: ProfileComponent },
     { path: 'logged-worker-projects', component: LoggedWorkerProjectsComponent },
-    { path: 'new-worker-project', component: NewWorkerProjectComponent },
     { path: 'edit-worker-project/:projectId', component: EditWorkerProjectComponent },
 
     { path: '**', redirectTo: 'home'},
