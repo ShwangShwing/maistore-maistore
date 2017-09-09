@@ -16,6 +16,9 @@ export class HeaderComponent implements OnInit {
   title: string;
   firebaseUser$: Observable<firebase.User> = null;
   ourUser$: Observable<UserModel[]>;
+  userType: string;
+  name: string;
+  email: string;
 
   constructor(private authService: AuthService, private userService: UsersService) {
     this.title = 'maistore-app';
@@ -27,7 +30,16 @@ export class HeaderComponent implements OnInit {
     this.firebaseUser$.subscribe(user => {
       if (user) {
         this.ourUser$ = this.userService.getByUserId(user.uid);
+        this.ourUser$.subscribe(curUser => {
+          this.userType = curUser[0].type;
+          this.name = curUser[0].name;
+          this.email = user.email;
+        });
+
       } else {
+        this.userType = null;
+        this.name = null;
+        this.email = null;
         this.ourUser$ = null;
       }
     });

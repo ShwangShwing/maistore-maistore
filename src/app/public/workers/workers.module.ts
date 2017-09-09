@@ -6,14 +6,16 @@ import { WorkerProjectsModule } from './worker-projects/worker-projects.module';
 import { RouterModule } from '@angular/router';
 
 import { WorkersService } from '../../services/data/workers.service';
-import { appRoutes } from '../../app.routes';
+
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(appRoutes),
+    RouterModule,
     CommonModule,
     WorkerModule,
-    WorkerProjectsModule
+    WorkerProjectsModule,
+    PipesModule
   ],
   declarations: [WorkersComponent],
   providers: [WorkersService]

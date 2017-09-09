@@ -4,32 +4,33 @@
 
 <div class='panel panel-primary'>
     <div class='panel-body'>
-        <div class='table-responsive'>
-            <table class='table' *ngIf='(allWorkers$ | async);else no_results'>
+        <div>
+            <table class='table-responsive' *ngIf='(workers$ | async);else no_results'>
                 <thead>
                     <tr>
                         <th>Photo</th>
                         <th>Name</th>
-                        <th>Progects</th>
+                        <th>Competencies</th>
+                        <th>Rating</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let worker of allWorkers$ | async'>
+                    <tr *ngFor='let worker of workers$ | async'>
                         <td>
-                          <img src='{{worker.photo}}' class='grid-image' />
+                          <img src='{{worker.picUrl}}' class='grid-image' style="max-width: 128px;" />
                         </td>
                         <td><a [routerLink]="[ '/workers', worker.userId ]">{{worker.name}}</a></td>
                         <td>
-                            <!-- <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>
-                                <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
-                            </div> -->
+                            <div class='row' *ngFor='let competency of worker.competencies'>
+                                {{competency.name}}
+                            </div>
+                        </td>
+                        <td>
+                            {{worker.userRatings | rating}}
                         </td>
                 </tbody>
             </table>
             <ng-template #no_results>No results found</ng-template>
         </div>
     </div>
-</div>
-<div *ngIf='errorMessage' class='alert alert-danger'>
-    Error: {{ errorMessage }}
 </div>

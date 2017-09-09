@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoggedWorkerProjectsComponent } from './logged-worker-projects.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { PipesModule } from '../../pipes/pipes.module';
 
@@ -9,7 +10,8 @@ import { PipesModule } from '../../pipes/pipes.module';
   imports: [
     CommonModule,
     PipesModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   declarations: [LoggedWorkerProjectsComponent]
 })

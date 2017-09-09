@@ -5,7 +5,7 @@ import { RatingPipe } from './rating.pipe';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   declarations: [KeysPipe, RatingPipe],
   exports: [KeysPipe, RatingPipe]

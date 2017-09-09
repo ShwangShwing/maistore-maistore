@@ -6,13 +6,22 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class RatingPipe implements PipeTransform {
 
   transform(ratings: any[]): string {
-    if (!ratings || ratings.length <= 0) {
+    if (!ratings) {
       return '0.0 / 5 (0 ratings)';
     }
 
-    const ratingSum = ratings.reduce((prev, cur) => prev + cur.rating, 0);
-    const averageRating = ratingSum / ratings.length;
-    return `${averageRating.toFixed(2)} / 5 (${ratings.length} ratings)`;
+    let ratingSum = 0;
+    let ratingCount = 0;
+    for (const userId in ratings) {
+      if (ratings.hasOwnProperty(userId)) {
+        ratingSum += +ratings[userId].rating;
+        ratingCount++;
+      }
+    }
+
+    const averageRating = ratingSum / ratingCount;
+
+    return `${averageRating.toFixed(2)} / 5 (${ratingCount} ratings)`;
   }
 
 }

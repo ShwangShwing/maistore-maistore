@@ -20,12 +20,12 @@
         <li [routerLinkActive]="['active']"><a *ngIf="!(firebaseUser$ | async)?.uid" routerLink="/register">Register</a></li>
         <li *ngIf="(firebaseUser$ | async)?.uid" class="dropdown">
           <a href="#" class="dropdown-toggle" *ngIf="(firebaseUser$ | async)?.uid" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            {{(ourUser$ | async)[0].name}} ({{(firebaseUser$ | async)?.email}}) <span class="caret"></span>
+            {{name}} ({{email}}) <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li *ngIf="(ourUser$ | async)[0].type == 'worker'" [routerLinkActive]="['active']"><a routerLink="/profile">Profile</a></li>
-            <li *ngIf="(ourUser$ | async)[0].type == 'worker'" [routerLinkActive]="['active']"><a routerLink="/logged-worker-projects">My Projects</a></li>
-            <li *ngIf="(ourUser$ | async)[0].type == 'worker'" role="separator" class="divider"></li>
+            <li *ngIf="userType == 'worker'" [routerLinkActive]="['active']"><a routerLink="/profile">Profile</a></li>
+            <li *ngIf="userType == 'worker'" [routerLinkActive]="['active']"><a routerLink="/logged-worker-projects">My Projects</a></li>
+            <li *ngIf="userType == 'worker'" role="separator" class="divider"></li>
             <li><a (click)="doLogout()" routerLink="/logout">Logout</a></li>
           </ul>
         </li>

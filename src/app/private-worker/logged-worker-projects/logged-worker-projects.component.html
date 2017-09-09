@@ -3,8 +3,8 @@
     Your projects
   </div>
   <div class='panel-body'>
-      <div class='table-responsive'>
-          <table class='table' *ngIf='(projects$ | async).length > 0;else no_results'>
+      <div>
+          <table class='table-responsive' *ngIf='(projects$ | async).length > 0;else no_results'>
               <thead>
                   <tr>
                       <th>Project</th>
@@ -15,7 +15,9 @@
               </thead>
               <tbody>
                   <tr *ngFor='let project of (projects$ | async);'>
-                      <td><a href='edit-worker-project/{{project.id}}'>{{project.name}}</a></td>
+                      <td>
+                            <a [routerLink]="['/edit-worker-project', project.id]">{{project.name}}</a>
+                      </td>
                       <td>
                           <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>
                               <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>

@@ -1,35 +1,58 @@
 <div class='panel panel-primary'>
-    <div class='panel-body'>
-        <div class='table-responsive'>
-            <table class='table' *ngIf='workerId;else no_results'>
+    <div class="panel-heading">Worker {{(worker$ | async).name }}</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div *ngFor="let competency of (competencies$ | async)" type="checkbox">
+                    <label>
+        <input type="checkbox" [value]="competency.name" disabled [checked]="checkedCompetencies[competency.name]">
+            {{competency.name}}
+        </label>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div>
+                    <img [src]="(worker$ | async).picUrl || 'assets/worker.png'" alt="Worker picture" class="img-rounded img-responsive">
+                </div>
+                <div>
+                    Average rating: {{(worker$ | async).userRatings | rating}}
+                </div>
+                <div>
+                    <select *ngIf="loggedUser$ && (loggedUser$ | async).type === 'user'" (change)="rate($event.target.value)" class="form-control" name="rating" id="rating">
+                        <option *ngIf="!workerRating" value="not-rated">Not rated</option>
+                        <option [selected]="workerRating == 1" value="1">Rate 1</option>
+                        <option [selected]="workerRating == 2" value="2">Rate 2</option>
+                        <option [selected]="workerRating == 3" value="3">Rate 3</option>
+                        <option [selected]="workerRating == 4" value="4">Rate 4</option>
+                        <option [selected]="workerRating == 5" value="5">Rate 5</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class='table-responsive' *ngIf='((worker$ | async).completedProjects | keys).length > 0;else no_results'>
                 <thead>
                     <tr>
-                        <th>Photo</th>
-                        <th>Name</th>
-                        <th>Competencies</th>
-                        <th>Projects</th>
+                        <th>Project</th>
+                        <th>competencies</th>
                         <th>Rating</th>
-                        <th>Email</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><img src='{{worker.picUrl}}' class='grid-image pic' /></td>
-                        <td>{{worker.name}}</td>
-                        <!-- <td>
-                          <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>
-                            <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
-                          </div>
+                    <tr *ngFor='let projectKeyValue of (worker$ | async).completedProjects | keys;'>
+                        <td><a [routerLink]="[ '/projects', projectKeyValue.value.id]">{{projectKeyValue.value.name}}</a></td>
+                        <td>
+                            <div class='row' *ngFor='let competencyKeyValue of (projectKeyValue.value.competencies | keys)'>
+                                <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
+                            </div>
                         </td>
-                        <td>{{project.userRatings[0].rating }}</td> -->
-                        <td>{{worker.email}}</td>
+                        <td>{{projectKeyValue.value.userRatings | rating }}</td>
                     </tr>
                 </tbody>
             </table>
-            <ng-template #no_results>No such user</ng-template>
+            <ng-template #no_results>
+                <div>Worker doesn't have any projects yet</div>
+            </ng-template>
         </div>
     </div>
-</div>
-<div *ngIf='errorMessage' class='alert alert-danger'>
-  Error: {{ errorMessage }}
 </div>
