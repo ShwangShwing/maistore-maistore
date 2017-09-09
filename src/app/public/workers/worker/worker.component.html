@@ -18,13 +18,13 @@
                     Average rating: {{(worker$ | async).userRatings | rating}}
                 </div>
                 <div>
-                    <select class="form-control" name="rating" id="rating">
-                        <option value="not-rated">Not rated</option>
-                        <option value="1">Rate 1</option>
-                        <option value="2">Rate 2</option>
-                        <option value="3">Rate 3</option>
-                        <option value="4">Rate 4</option>
-                        <option value="5">Rate 5</option>
+                    <select *ngIf="loggedUser$ && (loggedUser$ | async).type === 'user'" (change)="rate($event.target.value)" class="form-control" name="rating" id="rating">
+                        <option *ngIf="!workerRating" value="not-rated">Not rated</option>
+                        <option [selected]="workerRating == 1" value="1">Rate 1</option>
+                        <option [selected]="workerRating == 2" value="2">Rate 2</option>
+                        <option [selected]="workerRating == 3" value="3">Rate 3</option>
+                        <option [selected]="workerRating == 4" value="4">Rate 4</option>
+                        <option [selected]="workerRating == 5" value="5">Rate 5</option>
                     </select>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let projectKeyValue of (worker$ | async).completedProjects | keys;'>
-                        <td><a href='edit-worker-project/{{projectKeyValue.value.id}}'>{{projectKeyValue.value.name}}</a></td>
+                        <td><a [routerLink]="[ '/projects', projectKeyValue.value.id]">{{projectKeyValue.value.name}}</a></td>
                         <td>
                             <div class='row' *ngFor='let competencyKeyValue of (projectKeyValue.value.competencies | keys)'>
                                 <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
