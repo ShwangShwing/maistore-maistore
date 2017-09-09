@@ -10,13 +10,13 @@ import { WorkersService } from '../../services/data/workers.service';
   styleUrls: ['./workers.component.css']
 })
 export class WorkersComponent implements OnInit {
-  allWorkers$: Observable<WorkerModel[]>;
-  
+  workers$: Observable<WorkerModel[]>;
+
   $photo: '../../../assets/worker.png';
   constructor(private workersService: WorkersService) {}
 
   ngOnInit() {
-    this.allWorkers$ = this.workersService.getAll();
+    this.workers$ = this.workersService.getAll();
   }
 
 }
