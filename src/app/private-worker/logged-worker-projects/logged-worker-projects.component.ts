@@ -7,7 +7,6 @@ import { WorkersService } from '../../services/data/workers.service';
 import { CompetenciesService } from '../../services/data/competencies.service';
 
 import { CompletedProjectModel } from '../../models/completed-project.model';
-import { WorkerModel } from '../../models/worker.model';
 import { CompetencyModel } from '../../models/competency.model';
 
 @Component({
@@ -59,13 +58,11 @@ export class LoggedWorkerProjectsComponent implements OnInit {
       .then(() => {
         this.newProjectName = '';
 
-        console.log(this.checkedCompetencies);
         for (const index in this.checkedCompetencies) {
           if (this.checkedCompetencies.hasOwnProperty(index)) {
             this.checkedCompetencies[index] = false;
           }
         }
-        console.log(this.checkedCompetencies);
       });
   }
 
@@ -75,7 +72,6 @@ export class LoggedWorkerProjectsComponent implements OnInit {
 
   reallyDeleteProject(projectId: string) {
     if (this.projectIdForDelete === projectId) {
-      console.log('deleting ' + projectId);
       this.projectsService.deleteProject(this.workerId, projectId);
     }
 

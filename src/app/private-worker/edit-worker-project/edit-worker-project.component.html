@@ -1,3 +1,41 @@
-<p>
-  edit-worker-project works! Project id: {{projectId}}
-</p>
+<div class='panel panel-primary'>
+    <div class="panel-heading">
+      Edit project <strong>{{(project$ | async).name}}</strong>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <div>
+          <label for="project-name">name</label>
+          <input type="text"  [(ngModel)]="editedProject.name" name="project-name" id="project-name" placeholder="New Project Name" class="form-control">
+        </div>
+        <div>
+          <div *ngFor="let competency of (competencies$ | async)" type="checkbox">
+              <label>
+              <input type="checkbox" [(ngModel)]="checkedCompetencies[competency.name]">
+                {{competency.name}}
+              </label>
+            </div>
+        </div>
+        <div class='panel panel-primary'>
+            <div class="panel-heading">
+              Photos
+            </div>
+            <div class="panel-body">
+              <div *ngFor="let picUrl of editedProject.picturePaths; let i = index">            
+                  <img class="img-rounded img-responsive" [src]="picUrl" alt="projectpicture">
+                  <div>
+                    <button *ngIf="true" type="submit" class="btn btn-danger delete-button" (click)="deletePhoto(i)">Delete</button>
+                  </div>
+              </div>
+              <div *ngIf="!editedProject.picturePaths || editedProject.picturePaths.length <= 0">
+                This project doesn't have any photos
+              </div>
+              <div>
+                  <input type="file" (change)="fileChanged($event)" placeholder="Upload file..." class="btn btn-default" />
+              </div>
+            </div>
+          </div>
+        <div><button type="submit" class="btn btn-default" (click)="saveProject()">Save Project</button></div>
+      </div>
+  </div>
+</div>

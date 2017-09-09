@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
   fileChanged(e: Event) {
     const target: HTMLInputElement = e.target as HTMLInputElement;
     const file = target.files[0];
-    this.uploadService.upload(this.workerId, file)
+    this.uploadService.upload(`worker-pics/${this.workerId}`, file)
       .then(picUrl => {
         this.workersService.setWorkerPicUrl(this.workerId, picUrl);
       });

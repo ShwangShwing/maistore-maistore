@@ -22,6 +22,10 @@ export class CompletedProjectsService {
     return this.completedProjects$;
   }
 
+  getById(projectId: string): Observable<CompletedProjectModel> {
+    return this.af.object(`completedProjects/${projectId}`);
+  }
+
   getWorkerProjects(workerId: string): Observable<CompletedProjectModel[]> {
     return this.af.list(`workers/${workerId}/completedProjects`);
   }
@@ -37,6 +41,11 @@ export class CompletedProjectsService {
       });
   }
 
+  editProject(project: CompletedProjectModel) {
+    this.af.object(`completedProjects/${project.id}`).update(project);
+    this.af.object(`workers/${project.workerId}/completedProjects/${project.id}`).update(project);
+  }
+
   deleteProject(workerId: string, projectId: string) {
     this.af.object(`completedProjects/${projectId}`).remove();
     this.af.object(`workers/${workerId}/completedProjects/${projectId}`).remove();
@@ -44,10 +53,6 @@ export class CompletedProjectsService {
 
   rateProject(projectId: string, userId: string, rating: number) {
     this.af.object(`completedProjects/${projectId}/userRatings/${userId}`).set({ rating });
-  }
-
-  addPictureToProject(projectId: string, picturePath: string) {
-    // TODO!!
   }
 
   getProjectsByFilter(competencyIds: string[], minRating: number) {
