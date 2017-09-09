@@ -4,14 +4,15 @@ import { ProjectsComponent } from './projects.component';
 import { ProjectModule } from './project/project.module';
 import { CompletedProjectsService } from '../../services/data/completed-projects.service';
 
-import { KeysPipe } from '../../pipes/keys.pipe';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    ProjectModule
+    ProjectModule,
+    PipesModule
   ],
-  declarations: [ProjectsComponent, KeysPipe],
+  declarations: [ProjectsComponent],
   providers: [CompletedProjectsService]
 })
 export class ProjectsModule { }
