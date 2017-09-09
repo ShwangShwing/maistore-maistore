@@ -4,6 +4,7 @@
             <table class='table' *ngIf='workerId;else no_results'>
                 <thead>
                     <tr>
+                        <th>Id</th> <!-- for testing only -->
                         <th>Photo</th>
                         <th>Name</th>
                         <th>Competencies</th>
@@ -14,17 +15,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <!-- <td>{{user.photo}}</td> -->
                         <td>{{workerId}}</td>
-                        <td>{{user.name}}</td>
+                        <!-- <td><img src='{{worker.picUrl}}' class='grid-image' /></td> -->
+                        <td>{{worker.name}}</td>
                         <!-- <td>
                           <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>
                             <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
                           </div>
                         </td>
-                        <td><img src='{{project.picturePaths[0]}}' class='grid-image' /></td>
                         <td>{{project.userRatings[0].rating }}</td> -->
-                        <!-- <td>{{worker.email}}</td> -->
+                        <td>{{worker.email}}</td>
                     </tr>
                 </tbody>
             </table>

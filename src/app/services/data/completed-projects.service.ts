@@ -22,6 +22,10 @@ export class CompletedProjectsService {
     return this.completedProjects$;
   }
 
+  getById(projectId: string) {
+    return this.af.object(`completedProjects/${projectId}`);
+  }
+
   addProject(newCompletedProject: CompletedProjectModel): void {
     const pushedProjectKey = this.completedProjects$.push(newCompletedProject);
     this.af.object(`workers/${newCompletedProject.workerId}/completedProjects/${pushedProjectKey}`)

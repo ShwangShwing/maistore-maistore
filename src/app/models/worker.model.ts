@@ -10,4 +10,5 @@ export interface WorkerModel {
     userRatings: {
         rating: number; // between 1 and 5
     }[];
+    email: string;
 }
