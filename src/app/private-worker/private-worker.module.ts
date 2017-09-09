@@ -5,6 +5,9 @@ import { ProfileModule } from './profile/profile.module';
 import { LoggedWorkerProjectsModule } from './logged-worker-projects/logged-worker-projects.module';
 import { NewWorkerProjectModule } from './new-worker-project/new-worker-project.module';
 import { EditWorkerProjectModule } from './edit-worker-project/edit-worker-project.module';
+import { CompetenciesService } from '../services/data/competencies.service';
+import { WorkersService } from '../services/data/workers.service';
+import { UploadService } from '../services/data/upload-service.service';
 
 @NgModule({
   imports: [
@@ -14,6 +17,11 @@ import { EditWorkerProjectModule } from './edit-worker-project/edit-worker-proje
     NewWorkerProjectModule,
     EditWorkerProjectModule
   ],
-  declarations: []
+  declarations: [],
+  providers: [
+    CompetenciesService,
+    WorkersService,
+    UploadService
+  ]
 })
 export class PrivateWorkerModule { }

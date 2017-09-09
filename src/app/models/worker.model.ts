@@ -6,6 +6,7 @@ export interface WorkerModel {
     name: string;
     competencies: CompetencyModel[];
     completedProjects: CompletedProjectModel[];
+    picUrl?: string;
     userRatings: {
         rating: number; // between 1 and 5
     }[];
