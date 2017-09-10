@@ -53,7 +53,7 @@ export class CompletedProjectsService {
 
   rateProject(projectId: string, userId: string, workerId: string, rating: number) {
     this.af.object(`completedProjects/${projectId}/userRatings/${userId}`).set({ rating });
-    this.af.object(`workers/${workerId}/completedProjects/${projectId}/${userId}`).set({ rating });
+    this.af.object(`workers/${workerId}/completedProjects/${projectId}/userRatings/${userId}`).set({ rating });
   }
 
   getProjectsByFilter(competencyIds: string[], minRating: number) {
