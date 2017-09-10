@@ -1,6 +1,7 @@
 # MaistoreMaistore
 
 This is a single page application, written in angular 4, that connects people with workers for home repairs.
+Deployed at [https://afternoon-sands-81427.herokuapp.com](https://afternoon-sands-81427.herokuapp.com)
 
 ## Starting the application
 
