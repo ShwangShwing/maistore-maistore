@@ -39,8 +39,13 @@ export class WorkerComponent implements OnInit {
     this.competencies$ = this.competenciesService.getAll();
 
     this.authService.getAuthState().subscribe(loggedUser => {
-      this.loggedUserId = loggedUser.uid;
-      this.loggedUser$ = this.usersService.getById(loggedUser.uid);
+      this.loggedUserId = null;
+      this.loggedUser$ = null;
+
+      if (loggedUser) {
+        this.loggedUserId = loggedUser.uid;
+        this.loggedUser$ = this.usersService.getById(loggedUser.uid);
+      }
 
       this.workerId = this.route.snapshot.paramMap.get('workerId');
 
@@ -54,8 +59,10 @@ export class WorkerComponent implements OnInit {
             }
 
             this.workerRating = null;
-            if (worker.userRatings && worker.userRatings[this.loggedUserId]) {
-              this.workerRating = worker.userRatings[this.loggedUserId].rating;
+            if (loggedUser) {
+              if (worker.userRatings && worker.userRatings[this.loggedUserId]) {
+                this.workerRating = worker.userRatings[this.loggedUserId].rating;
+              }
             }
           });
     });

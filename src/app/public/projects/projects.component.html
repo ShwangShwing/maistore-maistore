@@ -18,21 +18,22 @@
                 <tbody>
                     <tr *ngFor='let project of (projects$ | async);'>
                         <td><a [routerLink]="[ '/projects', project.id ]">{{project.name}}</a></td>
-                        <td>{{(getWorker(project.workerId) | async).name}}</td>
+                        <td>
+                            <a [routerLink]="[ '/workers', project.workerId ]">
+                                {{(getWorker(project.workerId) | async).name}}
+                            </a>
+                        </td>
                         <td>
                             <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>
                                 <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
                             </div>
                         </td>
-                        <td><img src='{{project.picturePaths[0]}}' class='grid-image' /></td>
-                        <td>{{project.userRatings[0].rating }}</td>
+                        <td><img *ngIf="project.picturePaths && project.picturePaths.length > 0" src='{{project.picturePaths[0]}}' class='grid-image' /></td>
+                        <td>{{project.userRatings | rating}}</td>
                     </tr>
                 </tbody>
             </table>
             <ng-template #no_results>No results found</ng-template>
         </div>
     </div>
-</div>
-<div *ngIf='errorMessage' class='alert alert-danger'>
-  Error: {{ errorMessage }}
 </div>

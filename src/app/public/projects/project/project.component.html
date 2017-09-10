@@ -1,34 +1,64 @@
-<p>
-  project works! Project id: {{projectId}}
-</p>
-
 <div class='panel panel-primary'>
-    <div class='panel-body'>
-        <div class='table-responsive'>
-            <table class='table' *ngIf='projectId;else no_results'>
-                <thead>
-                    <tr>
-                        <th>Id</th> <!-- for testing only -->
-                        <th>Project Name</th>
-                        <th>Worker</th>
-                        <th>Competencies</th>
-                        <th>Rating</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{projectId}}</td>
-                        <td>{{project.name}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <ng-template #no_results>No such user</ng-template>
+    <div class="panel-heading">
+        Project <strong>{{(project$ | async).name}}</strong>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div *ngFor="let competency of (competencies$ | async)" type="checkbox">
+                                <label>
+                                <input type="checkbox" disabled [ngModel]="checkedCompetencies[competency.name]">
+                                    {{competency.name}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            Project rating: {{project.userRatings | rating}}
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <select *ngIf="loggedUser$ && (loggedUser$ | async).type === 'user'" (change)="rate($event.target.value)" class="form-control" name="rating" id="rating">
+                                <option *ngIf="!projectRating" value="not-rated">Not rated</option>
+                                <option [selected]="projectRating == 1" value="1">Rate 1</option>
+                                <option [selected]="projectRating == 2" value="2">Rate 2</option>
+                                <option [selected]="projectRating == 3" value="3">Rate 3</option>
+                                <option [selected]="projectRating == 4" value="4">Rate 4</option>
+                                <option [selected]="projectRating == 5" value="5">Rate 5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <img [src]="worker.picUrl" alt="Worker picture" class="img-rounded img-responsive">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <a [routerLink]="[ '/workers', project.workerId ]">
+                                {{worker.name}}
+                            </a>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            Worker rating: {{worker.userRatings | rating}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='panel panel-primary'>
+                <div class="panel-heading">
+                    Photos
+                </div>
+                <div class="panel-body">
+                    <div *ngFor="let picUrl of project.picturePaths;">
+                        <img class="img-rounded img-responsive" [src]="picUrl" alt="projectpicture">
+                    </div>
+                    <div *ngIf="!project.picturePaths || project.picturePaths.length <= 0">
+                        This project doesn't have any photos
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div *ngIf='errorMessage' class='alert alert-danger'>
-  Error: {{ errorMessage }}
 </div>
