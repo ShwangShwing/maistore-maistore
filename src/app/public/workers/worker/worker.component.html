@@ -18,7 +18,7 @@
                     Average rating: {{(worker$ | async).userRatings | rating}}
                 </div>
                 <div>
-                    <select *ngIf="loggedUser$ && (loggedUser$ | async).type === 'user'" (change)="rate($event.target.value)" class="form-control" name="rating" id="rating">
+                    <select *ngIf="isLoggedUser" (change)="rate($event.target.value)" class="form-control" name="rating" id="rating">
                         <option *ngIf="!workerRating" value="not-rated">Not rated</option>
                         <option [selected]="workerRating == 1" value="1">Rate 1</option>
                         <option [selected]="workerRating == 2" value="2">Rate 2</option>
@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let projectKeyValue of (worker$ | async).completedProjects | keys;'>
-                        <td><a [routerLink]="[ '/projects', projectKeyValue.value.id]">{{projectKeyValue.value.name}}</a></td>
+                        <td><a [routerLink]="[ '/public/projects', projectKeyValue.value.id]">{{projectKeyValue.value.name}}</a></td>
                         <td>
                             <div class='row' *ngFor='let competencyKeyValue of (projectKeyValue.value.competencies | keys)'>
                                 <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>

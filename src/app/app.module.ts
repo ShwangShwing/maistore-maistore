@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ReflectiveInjector } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -19,8 +19,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PublicModule } from './public/public.module';
 import { PrivateWorkerModule } from './private-worker/private-worker.module';
 
-import { appRoutes } from './app.routes';
-
+import { RootRoutingModule } from './root-routing/root-routing.module';
 
 @NgModule({
   declarations: [
@@ -35,13 +34,13 @@ import { appRoutes } from './app.routes';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(appRoutes),
+    RootRoutingModule,
     PublicModule,
     PrivateWorkerModule
   ],
   providers: [
     AuthService,
-    UsersService
+    UsersService,
   ],
   bootstrap: [AppComponent]
 })

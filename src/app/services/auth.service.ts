@@ -13,6 +13,8 @@ import { WorkersService } from './data/workers.service';
 @Injectable()
 export class AuthService {
   private authState$: Observable<firebase.User>;
+  private isLoggedUser = false;
+  private isLoggedWorker = false;
 
   constructor(private af: AngularFireDatabase,
     private afAuth: AngularFireAuth,
@@ -20,6 +22,31 @@ export class AuthService {
     private workersService: WorkersService) {
 
     this.authState$ = this.afAuth.authState;
+
+    this.authState$.subscribe(user => {
+      this.isLoggedUser = false;
+      this.isLoggedWorker = false;
+
+      if (!user) {
+        return;
+      }
+
+      this.usersService.getByUserId(user.uid).subscribe(([ourUser]) => {
+        if (ourUser.type === 'worker') {
+          this.isLoggedWorker = true;
+        } else if (ourUser.type === 'user') {
+          this.isLoggedUser = true;
+        }
+      });
+    });
+  }
+
+  getIsLoggedUser() {
+    return this.isLoggedUser;
+  }
+
+  getIsLoggedWorker() {
+    return this.isLoggedWorker;
   }
 
   getAuthState() {

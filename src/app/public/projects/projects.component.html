@@ -17,9 +17,9 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let project of (projects$ | async);'>
-                        <td><a [routerLink]="[ '/projects', project.id ]">{{project.name}}</a></td>
+                        <td><a [routerLink]="[ '/public/projects', project.id ]">{{project.name}}</a></td>
                         <td>
-                            <a [routerLink]="[ '/workers', project.workerId ]">
+                            <a [routerLink]="[ '/public/workers', project.workerId ]">
                                 {{(getWorker(project.workerId) | async).name}}
                             </a>
                         </td>

@@ -6,6 +6,7 @@ import { EditWorkerProjectModule } from './edit-worker-project/edit-worker-proje
 import { CompetenciesService } from '../services/data/competencies.service';
 import { WorkersService } from '../services/data/workers.service';
 import { UploadService } from '../services/data/upload-service.service';
+import { PrivateRoutingModule } from './private-routing.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { UploadService } from '../services/data/upload-service.service';
     ProfileModule,
     LoggedWorkerProjectsModule,
     EditWorkerProjectModule,
+    PrivateRoutingModule
   ],
   declarations: [],
   providers: [

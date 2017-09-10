@@ -28,6 +28,7 @@ export class ProjectComponent implements OnInit {
   loggedUserId: string;
   loggedUser$: Observable<UserModel>;
   projectRating: number = null;
+  isLoggedUser = false;
 
   constructor(private route: ActivatedRoute,
     private usersService: UsersService,
@@ -43,6 +44,8 @@ export class ProjectComponent implements OnInit {
     this.authService.getAuthState().subscribe(loggedUser => {
       this.loggedUserId = null;
       this.loggedUser$ = null;
+
+      this.isLoggedUser = this.authService.getIsLoggedUser();
 
       if (loggedUser) {
         this.loggedUserId = loggedUser.uid;

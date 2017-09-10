@@ -7,26 +7,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" routerLink="/home">Maistore Maistore</a>
+      <a class="navbar-brand" routerLink="public/home">Maistore Maistore</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li [routerLinkActive]="['active']"><a routerLink="/home">Home</a></li>
-        <li [routerLinkActive]="['active']"><a routerLink="/workers">Workers</a></li>
-        <li [routerLinkActive]="['active']"><a routerLink="/projects">Projects</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="public/workers">Workers</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="public/projects">Projects</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li [routerLinkActive]="['active']"><a *ngIf="!(firebaseUser$ | async)?.uid" routerLink="/login">Login</a></li>
-        <li [routerLinkActive]="['active']"><a *ngIf="!(firebaseUser$ | async)?.uid" routerLink="/register">Register</a></li>
+        <li [routerLinkActive]="['active']"><a *ngIf="!(firebaseUser$ | async)?.uid" routerLink="public/login">Login</a></li>
+        <li [routerLinkActive]="['active']"><a *ngIf="!(firebaseUser$ | async)?.uid" routerLink="public/register">Register</a></li>
         <li *ngIf="(firebaseUser$ | async)?.uid" class="dropdown">
           <a href="#" class="dropdown-toggle" *ngIf="(firebaseUser$ | async)?.uid" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             {{name}} ({{email}}) <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li *ngIf="userType == 'worker'" [routerLinkActive]="['active']"><a routerLink="/profile">Profile</a></li>
-            <li *ngIf="userType == 'worker'" [routerLinkActive]="['active']"><a routerLink="/logged-worker-projects">My Projects</a></li>
+            <li *ngIf="userType == 'worker'" [routerLinkActive]="['active']"><a routerLink="private/profile">Profile</a></li>
+            <li *ngIf="userType == 'worker'" [routerLinkActive]="['active']"><a routerLink="private/logged-worker-projects">My Projects</a></li>
             <li *ngIf="userType == 'worker'" role="separator" class="divider"></li>
-            <li><a (click)="doLogout()" routerLink="/logout">Logout</a></li>
+            <li><a (click)="doLogout()" routerLink="public/logout">Logout</a></li>
           </ul>
         </li>
       </ul>

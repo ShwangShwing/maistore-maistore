@@ -16,7 +16,7 @@
               <tbody>
                   <tr *ngFor='let project of (projects$ | async);'>
                       <td>
-                            <a [routerLink]="['/edit-worker-project', project.id]">{{project.name}}</a>
+                            <a [routerLink]="['/private/edit-worker-project', project.id]">{{project.name}}</a>
                       </td>
                       <td>
                           <div class='row' *ngFor='let competencyKeyValue of (project.competencies | keys); let i = index'>

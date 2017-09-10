@@ -5,6 +5,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class PictureBringFrontDirective {
   private pictureElement = null;
+  private enlargedPictureElement = null;
 
   constructor(el: ElementRef) {
     if (el.nativeElement.tagName === 'IMG' || el.nativeElement.tagName === 'img') {

@@ -19,7 +19,7 @@
                         <td>
                           <img appPictureBringFront src='{{worker.picUrl}}' class='grid-image' style="max-width: 128px;" />
                         </td>
-                        <td><a [routerLink]="[ '/workers', worker.userId ]">{{worker.name}}</a></td>
+                        <td><a [routerLink]="[ '/public/workers', worker.userId ]">{{worker.name}}</a></td>
                         <td>
                             <div class='row' *ngFor='let competency of worker.competencies'>
                                 {{competency.name}}

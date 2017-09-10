@@ -8,6 +8,8 @@ import { RegisterModule } from './register/register.module';
 import { LoginModule } from './login/login.module';
 import { LogoutModule } from './logout/logout.module';
 
+import { PublicRoutingModule } from './public-routing.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { LogoutModule } from './logout/logout.module';
     ProjectsModule,
     RegisterModule,
     LoginModule,
-    LogoutModule
+    LogoutModule,
+    PublicRoutingModule
   ],
   declarations: []
 })

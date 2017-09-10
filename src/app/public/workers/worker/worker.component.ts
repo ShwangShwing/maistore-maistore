@@ -25,6 +25,8 @@ export class WorkerComponent implements OnInit {
   loggedUserId: string;
   workerId: string;
 
+  isLoggedUser = false;
+
   checkedCompetencies: boolean[] = [];
 
   constructor(
@@ -37,6 +39,8 @@ export class WorkerComponent implements OnInit {
 
   ngOnInit() {
     this.competencies$ = this.competenciesService.getAll();
+
+    this.isLoggedUser = this.authService.getIsLoggedUser();
 
     this.authService.getAuthState().subscribe(loggedUser => {
       this.loggedUserId = null;
