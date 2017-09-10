@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { WorkersService } from '../../services/data/workers.service';
 
 import { PipesModule } from '../../pipes/pipes.module';
+import { DirectivesModule } from '../../directives/directives.module';
 
 @NgModule({
   imports: [
@@ -15,9 +16,10 @@ import { PipesModule } from '../../pipes/pipes.module';
     CommonModule,
     WorkerModule,
     WorkerProjectsModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ],
   declarations: [WorkersComponent],
-  providers: [WorkersService]
+  providers: [WorkersService],
 })
 export class WorkersModule { }

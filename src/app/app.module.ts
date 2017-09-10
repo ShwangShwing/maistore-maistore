@@ -26,7 +26,7 @@ import { appRoutes } from './app.routes';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

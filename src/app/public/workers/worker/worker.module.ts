@@ -5,11 +5,14 @@ import { RouterModule } from '@angular/router';
 import { WorkerComponent } from './worker.component';
 import { PipesModule } from '../../../pipes/pipes.module';
 
+import { DirectivesModule } from '../../../directives/directives.module';
+
 @NgModule({
   imports: [
     CommonModule,
     PipesModule,
-    RouterModule
+    RouterModule,
+    DirectivesModule
   ],
   declarations: [WorkerComponent]
 })

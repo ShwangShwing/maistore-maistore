@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 
 
 import { PipesModule } from '../../pipes/pipes.module';
+import { DirectivesModule } from '../../directives/directives.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PipesModule } from '../../pipes/pipes.module';
     RouterModule,
     CommonModule,
     ProjectModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ],
   declarations: [ProjectsComponent],
   providers: [CompletedProjectsService]

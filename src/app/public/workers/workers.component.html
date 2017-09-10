@@ -17,7 +17,7 @@
                 <tbody>
                     <tr *ngFor='let worker of workers$ | async'>
                         <td>
-                          <img src='{{worker.picUrl}}' class='grid-image' style="max-width: 128px;" />
+                          <img appPictureBringFront src='{{worker.picUrl}}' class='grid-image' style="max-width: 128px;" />
                         </td>
                         <td><a [routerLink]="[ '/workers', worker.userId ]">{{worker.name}}</a></td>
                         <td>

@@ -28,7 +28,7 @@
                                 <div class='col-md-4'>{{competencyKeyValue.value.name}}</div>
                             </div>
                         </td>
-                        <td><img *ngIf="project.picturePaths && project.picturePaths.length > 0" src='{{project.picturePaths[0]}}' class='grid-image' /></td>
+                        <td><img appPictureBringFront *ngIf="project.picturePaths && project.picturePaths.length > 0" src='{{project.picturePaths[0]}}' class='grid-image' /></td>
                         <td>{{project.userRatings | rating}}</td>
                     </tr>
                 </tbody>

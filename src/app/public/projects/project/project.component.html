@@ -33,7 +33,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <img [src]="worker.picUrl" alt="Worker picture" class="img-rounded img-responsive">
+                            <img appPictureBringFront [src]="worker.picUrl" alt="Worker picture" class="img-rounded img-responsive">
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <a [routerLink]="[ '/workers', project.workerId ]">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="panel-body">
                     <div *ngFor="let picUrl of project.picturePaths;">
-                        <img class="img-rounded img-responsive" [src]="picUrl" alt="projectpicture">
+                        <img appPictureBringFront class="img-rounded img-responsive" [src]="picUrl" alt="projectpicture">
                     </div>
                     <div *ngIf="!project.picturePaths || project.picturePaths.length <= 0">
                         This project doesn't have any photos
